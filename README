@@ -1,0 +1,15 @@
+Python Civic
+
+A python wrapper around the Civic verification API.
+
+Works with Python 3. Django is not a strict requirement but you can pass the secret and id
+yourself in the `civic_utils.py`.
+
+Once you verify user identity using the civic SIP js library and gain access token, you can
+call the `get_user_data` to exchange the token with user data.
+
+TODO:
+- While decoding the jwt token make sure we verify the integrity of the token
+- After decrypting the civic user data, the data is [padded](https://en.wikipedia.org/wiki/Padding_(cryptography)#PKCS%235_and_PKCS%237). Need to unpad the data with proper PKCS7 unpadder.
+
+We welcome pull requests to make this library.
