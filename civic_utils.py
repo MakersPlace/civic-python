@@ -74,11 +74,7 @@ def get_user_data(jwt_token):
     encrypted = base64.b64decode(encodedData)
     decryptor = cipher.decryptor()
     decrypted_data_in_bytes = decryptor.update(encrypted) + decryptor.finalize()
-    # unpadder = padding.PKCS7(192).unpadder()
-    # # Remove padding like \x0f
-    # unpadded_decrypted_data_json = unpadder.update(decrypted_data_in_bytes)
-    # The unpadder is not working consistently. so using an ugly hack here.
-    end_index = decrypted_data_in_bytes.index(b'}]')
-    decrypted_data_json = decrypted_data_in_bytes[:end_index+2].decode('ISO-8859-1')
-    # decrypted_data_json = unpadded_decrypted_data_json.decode('ISO-8859-1')
+     # This ensures that we do not get any other unicode characters after the list.
+    beginningIndex = decrypted_data_json.index('[')
+    endingIndex = decrypted_data_json.index(']')
     return json.loads(decrypted_data_json)
