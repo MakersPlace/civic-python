@@ -77,4 +77,4 @@ def get_user_data(jwt_token):
      # This ensures that we do not get any other unicode characters after the list.
     beginningIndex = decrypted_data_json.index('[')
     endingIndex = decrypted_data_json.index(']')
-    return json.loads(decrypted_data_json)
+    return json.loads(decrypted_data_json[beginningIndex:endingIndex+1])
